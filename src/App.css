@@ -38,3 +38,139 @@
 .navbar-links a:hover {
   color: var(--text-primary);
 }
+.hero {
+  max-width: 1200px;
+  min-height: 650px;
+  margin: 0 auto;
+  padding: 100px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-label {
+  margin-bottom: 20px;
+
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hero h1 {
+  margin: 0;
+
+  color: var(--text-primary);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.hero-description {
+  max-width: 650px;
+  margin: 28px auto 36px;
+
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 24px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--accent);
+  color: var(--text-primary);
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+.how-it-works {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.section-heading {
+  max-width: 650px;
+  margin-bottom: 50px;
+}
+
+.section-label {
+  margin-bottom: 12px;
+
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.section-heading h2 {
+  margin: 0 0 16px;
+
+  color: var(--text-primary);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.section-heading > p:last-child {
+  margin: 0;
+
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  padding: 28px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--bg-secondary);
+}
+
+.step-number {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.step-card h3 {
+  margin: 40px 0 12px;
+
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.step-card p {
+  margin: 0;
+
+  color: var(--text-secondary);
+  line-height: 1.7;
+}

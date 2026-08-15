@@ -1,5 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
 
 function App() {
   return (
@@ -7,8 +9,8 @@ function App() {
       <Navbar />
 
       <main>
-        <h1>DebugMate</h1>
-        <p>Your AI-powered debugging tutor.</p>
+        <Hero />
+        <HowItWorks />
       </main>
     </div>
   );
