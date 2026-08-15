@@ -79,7 +79,10 @@ function DebuggingWorkspace() {
           <textarea
             id="code"
             value={code}
-            onChange={(event) => setCode(event.target.value)}
+            onChange={(event) => {
+  setCode(event.target.value);
+  setValidationError("");
+}}
             placeholder="Paste the code causing the error here..."
             rows="12"
             disabled={status === "loading"}
@@ -92,7 +95,10 @@ function DebuggingWorkspace() {
           <textarea
             id="error"
             value={error}
-            onChange={(event) => setError(event.target.value)}
+            onChange={(event) => {
+  setError(event.target.value);
+  setValidationError("");
+}}
             placeholder="Paste the error message here..."
             rows="6"
             disabled={status === "loading"}
@@ -108,17 +114,29 @@ function DebuggingWorkspace() {
         </button>
 
         {status === "success" && (
-          <div className="debug-result">
-            <p className="result-label">ANALYSIS READY</p>
+  <div className="debug-result">
+    <p className="result-label">ANALYSIS READY</p>
 
-            <h3>Your debugging request was submitted successfully.</h3>
+    <h3>Your debugging request was submitted successfully.</h3>
 
-            <p>
-              The AI explanation will appear here once the backend is
-              connected.
-            </p>
-          </div>
-        )}
+    <p>
+      The AI explanation will appear here once the backend is connected.
+    </p>
+
+    <button
+      type="button"
+      className="reset-button"
+      onClick={() => {
+        setCode("");
+        setError("");
+        setStatus("idle");
+        setValidationError("");
+      }}
+    >
+      Debug Another Error
+    </button>
+  </div>
+)}
       </form>
     </section>
   );

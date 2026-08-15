@@ -338,3 +338,79 @@
   color: var(--text-secondary);
   line-height: 1.6;
 }
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .step-card {
+    padding: 24px;
+  }
+
+  .debug-workspace {
+    padding: 80px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .how-it-works {
+    padding: 70px 20px;
+  }
+
+  .workspace-heading h2,
+  .section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .debug-workspace {
+    padding: 70px 20px;
+  }
+
+  .debug-form {
+    padding: 20px;
+  }
+
+  .debug-button {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .navbar {
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+}
+.reset-button {
+  margin-top: 20px;
+
+  padding: 12px 18px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.reset-button:hover {
+  background: var(--bg-primary);
+  border-color: var(--accent);
+}
