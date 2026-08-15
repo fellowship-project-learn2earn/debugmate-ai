@@ -414,3 +414,85 @@
   background: var(--bg-primary);
   border-color: var(--accent);
 }
+.debug-result-panel {
+  margin-top: 32px;
+  padding: 32px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  background: var(--bg-secondary);
+}
+
+.result-header {
+  margin-bottom: 40px;
+}
+
+.result-header h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.result-section {
+  padding: 24px 0;
+
+  border-top: 1px solid var(--border);
+}
+
+.result-section h3 {
+  margin: 0 0 12px;
+
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.result-section p {
+  margin: 0;
+
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.code-block {
+  margin: 16px 0 0;
+  padding: 20px;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: var(--bg-primary);
+}
+
+.code-block code {
+  color: var(--text-primary);
+
+  font-family:
+    "Cascadia Code",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.result-learning {
+  margin-top: 24px;
+  padding: 20px;
+
+  border-radius: var(--radius-md);
+
+  background: var(--bg-primary);
+}
+
+.result-learning p:last-child {
+  margin: 0;
+
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
