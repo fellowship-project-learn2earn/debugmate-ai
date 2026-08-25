@@ -1,0 +1,338 @@
+[
+  {
+    "id": "py-nameerror-001",
+    "error_type": "NameError",
+    "language": "python",
+    "common_triggers": [
+      "name '<var>' is not defined",
+      "used a variable before assigning it",
+      "typo in variable name"
+    ],
+    "explanation": "Python raised this because it tried to look up a variable name that doesn't exist yet in any accessible scope.",
+    "likely_causes": [
+      "The variable was never defined before this line ran",
+      "The variable name is misspelled somewhere",
+      "The variable was defined inside a function or block and isn't visible outside it",
+      "The variable was defined after the line that uses it"
+    ],
+    "debugging_steps": [
+      "Read the exact variable name in the error message",
+      "Search the file for where that name is first assigned",
+      "Check for spelling or case differences (Python is case-sensitive)",
+      "Check whether the assignment happens inside a function, loop, or conditional that may not have run",
+      "Confirm the assignment happens before the line that uses the variable"
+    ],
+    "fix_pattern": "Define the variable before it is used, correct the spelling, or move the assignment to a scope visible at the point of use.",
+    "learning_concept": "Python variable scope and the order of execution",
+    "practice_seed": "Give the user a snippet where a variable is defined inside an if-block that doesn't execute, and ask them to fix it so the variable is always defined.",
+    "references": ["https://docs.python.org/3/tutorial/errors.html"],
+    "tags": ["scope", "variables", "beginner"]
+  },
+  {
+    "id": "py-typeerror-001",
+    "error_type": "TypeError",
+    "language": "python",
+    "common_triggers": [
+      "unsupported operand type(s)",
+      "object is not callable",
+      "argument must be str, not int"
+    ],
+    "explanation": "Python raised this because an operation or function was used with a value of a type it doesn't support.",
+    "likely_causes": [
+      "Mixing incompatible types in an operation, e.g. string + integer",
+      "Calling a variable that isn't actually a function",
+      "Passing the wrong type of argument to a built-in or library function",
+      "Forgetting to convert user input (which is always a string) before using it numerically"
+    ],
+    "debugging_steps": [
+      "Read which operation or function call triggered the error",
+      "Print or check the type() of each value involved",
+      "Check whether input from a file, API, or user needs explicit conversion",
+      "Check the documentation for the expected argument types"
+    ],
+    "fix_pattern": "Convert the value to the expected type before the operation, or adjust the function call to match expected argument types.",
+    "learning_concept": "Python data types and type conversion",
+    "practice_seed": "Give the user a snippet that adds a string and an integer, and ask them to fix the type mismatch.",
+    "references": ["https://docs.python.org/3/library/exceptions.html#TypeError"],
+    "tags": ["types", "conversion", "beginner"]
+  },
+  {
+    "id": "py-indexerror-001",
+    "error_type": "IndexError",
+    "language": "python",
+    "common_triggers": [
+      "list index out of range",
+      "loop off-by-one",
+      "accessing last element incorrectly"
+    ],
+    "explanation": "Python raised this because the code tried to access a position in a list (or other sequence) that doesn't exist.",
+    "likely_causes": [
+      "Using an index equal to or greater than the length of the list",
+      "Off-by-one error in a loop range",
+      "Assuming a list has more elements than it actually does",
+      "Using len(list) as an index instead of len(list) - 1"
+    ],
+    "debugging_steps": [
+      "Print len(list) right before the failing line",
+      "Print the index value being used",
+      "Check loop bounds — range(len(list)) is valid, range(len(list)+1) is not",
+      "Confirm the list actually contains the expected number of items at this point in the program"
+    ],
+    "fix_pattern": "Adjust the index or loop range so it never exceeds len(list) - 1, or add a bounds check before accessing the element.",
+    "learning_concept": "List indexing and zero-based indexing in Python",
+    "practice_seed": "Give the user a loop that goes one index too far, and ask them to fix the off-by-one error.",
+    "references": ["https://docs.python.org/3/tutorial/introduction.html#lists"],
+    "tags": ["lists", "indexing", "beginner"]
+  },
+  {
+    "id": "py-keyerror-001",
+    "error_type": "KeyError",
+    "language": "python",
+    "common_triggers": [
+      "KeyError exception raised when accessing a dictionary",
+      "dictionary key not found in dict lookup",
+      "missing key when indexing a dict with square brackets",
+      "KeyError traceback from dict[key] access"
+    ],
+    "explanation": "Python raised a KeyError, a dictionary-specific exception, because the code tried to access a dictionary key that doesn't exist.",
+    "likely_causes": [
+      "The key was misspelled or has different casing than expected",
+      "The key was never added to the dictionary",
+      "The dictionary structure changed (e.g. from an API response) and the key is no longer present",
+      "The code assumes a key exists without checking first"
+    ],
+    "debugging_steps": [
+      "Print the dictionary right before the failing line to see its actual keys",
+      "Compare the expected key spelling/case to the actual keys present",
+      "Check if the key is conditionally added elsewhere in the code",
+      "Use .get() to inspect whether the key is truly missing versus None"
+    ],
+    "fix_pattern": "Use dict.get(key, default) for optional keys, or verify the key exists with 'if key in dict' before accessing it directly.",
+    "learning_concept": "Python dictionaries and safe key access",
+    "practice_seed": "Give the user a snippet that accesses a dict key that may not exist, and ask them to make it safe using .get().",
+    "references": ["https://docs.python.org/3/library/stdtypes.html#dict"],
+    "tags": ["dictionaries", "beginner"]
+  },
+  {
+    "id": "py-attributeerror-001",
+    "error_type": "AttributeError",
+    "language": "python",
+    "common_triggers": [
+      "'<type>' object has no attribute '<name>'",
+      "NoneType has no attribute",
+      "method or attribute typo"
+    ],
+    "explanation": "Python raised this because the code tried to use a method or attribute that doesn't exist on that object's type.",
+    "likely_causes": [
+      "The object is actually None, often because an earlier function returned nothing",
+      "A typo in the method or attribute name",
+      "The object is a different type than the developer assumed",
+      "Using a method that exists on a similar but different type (e.g. list method on a string)"
+    ],
+    "debugging_steps": [
+      "Print type(object) right before the failing line",
+      "Check whether the object could be None due to an earlier function call",
+      "Check the spelling of the attribute or method name against the documentation",
+      "Trace back to where the object was created or last modified"
+    ],
+    "fix_pattern": "Confirm the object's type and that it isn't None before calling the attribute or method; correct typos; use the right type's API.",
+    "learning_concept": "Python object types and None handling",
+    "practice_seed": "Give the user a function that sometimes returns None, causing a later .append() call to fail, and ask them to fix it.",
+    "references": ["https://docs.python.org/3/library/exceptions.html#AttributeError"],
+    "tags": ["objects", "none-handling", "beginner"]
+  },
+  {
+    "id": "py-modulenotfounderror-001",
+    "error_type": "ModuleNotFoundError",
+    "language": "python",
+    "common_triggers": [
+      "No module named '<name>'",
+      "import error",
+      "package not installed"
+    ],
+    "explanation": "Python raised this because it could not find a module or package being imported.",
+    "likely_causes": [
+      "The package isn't installed in the current environment",
+      "The package is installed in a different Python environment/virtualenv than the one running",
+      "A typo in the import statement or module name",
+      "The module is a local file that isn't in the expected directory or on the path"
+    ],
+    "debugging_steps": [
+      "Check the exact spelling of the module name in the error",
+      "Confirm the package is installed (pip show <package>) in the active environment",
+      "Check which Python/virtualenv is currently active",
+      "If it's a local file, confirm it's in the same directory or properly added to sys.path"
+    ],
+    "fix_pattern": "Install the missing package in the active environment, correct the import name, or fix the file/module path.",
+    "learning_concept": "Python environments, virtual environments, and package installation",
+    "practice_seed": "Give the user an import statement for an uninstalled package and ask them to describe the correct pip install command.",
+    "references": ["https://docs.python.org/3/tutorial/venv.html"],
+    "tags": ["imports", "environments", "beginner"]
+  },
+  {
+    "id": "py-indentationerror-001",
+    "error_type": "IndentationError",
+    "language": "python",
+    "common_triggers": [
+      "unexpected indent",
+      "expected an indented block",
+      "inconsistent use of tabs and spaces"
+    ],
+    "explanation": "Python raised this because the code's indentation doesn't follow a consistent, valid structure — Python uses indentation to define code blocks.",
+    "likely_causes": [
+      "Mixing tabs and spaces in the same file",
+      "A block (if/for/def/etc.) that isn't followed by an indented line",
+      "Copy-pasted code bringing in different indentation levels",
+      "An extra or missing indent on a single line"
+    ],
+    "debugging_steps": [
+      "Check the exact line number mentioned in the error",
+      "Look for mixed tabs/spaces (many editors can show whitespace characters)",
+      "Confirm every colon-ending line (if, for, def, etc.) is followed by an indented block",
+      "Reformat the file consistently using 4 spaces per indent level (PEP 8)"
+    ],
+    "fix_pattern": "Make indentation consistent (spaces only, per PEP 8) and ensure every block header has an indented body.",
+    "learning_concept": "Python's block structure and PEP 8 indentation conventions",
+    "practice_seed": "Give the user a snippet with mixed tabs/spaces and ask them to fix the indentation.",
+    "references": ["https://peps.python.org/pep-0008/"],
+    "tags": ["syntax", "formatting", "beginner"]
+  },
+  {
+    "id": "py-valueerror-001",
+    "error_type": "ValueError",
+    "language": "python",
+    "common_triggers": [
+      "invalid literal for int()",
+      "could not convert string to float",
+      "value out of expected range"
+    ],
+    "explanation": "Python raised this because a function received an argument of the right type but an inappropriate or unconvertible value.",
+    "likely_causes": [
+      "Trying to convert a non-numeric string to int/float",
+      "Passing an unexpected value to a function with restricted valid inputs",
+      "User input that wasn't validated before conversion",
+      "Data from a file or API that doesn't match the expected format"
+    ],
+    "debugging_steps": [
+      "Print the exact value being passed right before the failing line",
+      "Check whether the value's source (user input, file, API) is validated",
+      "Check the function's documentation for what values it accepts",
+      "Add a try/except around the conversion to handle bad input gracefully"
+    ],
+    "fix_pattern": "Validate or sanitize the value before conversion, and handle invalid cases explicitly rather than assuming well-formed input.",
+    "learning_concept": "Input validation and safe type conversion in Python",
+    "practice_seed": "Give the user a snippet that crashes on int(input()) with non-numeric input, and ask them to add validation.",
+    "references": ["https://docs.python.org/3/library/exceptions.html#ValueError"],
+    "tags": ["validation", "conversion", "beginner"]
+  },
+  {
+    "id": "py-zerodivisionerror-001",
+    "error_type": "ZeroDivisionError",
+    "language": "python",
+    "common_triggers": [
+      "division by zero",
+      "modulo by zero"
+    ],
+    "explanation": "Python raised this because the code attempted to divide a number by zero, which is mathematically undefined.",
+    "likely_causes": [
+      "A divisor variable was computed as zero unexpectedly (e.g. an empty list's length)",
+      "User input included zero without validation",
+      "A calculation assumes a non-zero denominator that isn't guaranteed"
+    ],
+    "debugging_steps": [
+      "Print the divisor value right before the failing line",
+      "Trace back to where the divisor is computed or supplied",
+      "Check whether the divisor can legitimately be zero in valid program states",
+      "Add a guard clause to handle the zero case explicitly"
+    ],
+    "fix_pattern": "Add a conditional check for zero before dividing, and decide on sensible fallback behavior (e.g. return 0, raise a clearer error, or skip the calculation).",
+    "learning_concept": "Guarding against edge cases in arithmetic operations",
+    "practice_seed": "Give the user a function computing an average that fails on an empty list, and ask them to guard against division by zero.",
+    "references": ["https://docs.python.org/3/library/exceptions.html#ZeroDivisionError"],
+    "tags": ["arithmetic", "edge-cases", "beginner"]
+  },
+  {
+    "id": "py-filenotfounderror-001",
+    "error_type": "FileNotFoundError",
+    "language": "python",
+    "common_triggers": [
+      "No such file or directory",
+      "cannot find the file specified",
+      "wrong file path"
+    ],
+    "explanation": "Python raised this because it tried to open a file at a path that doesn't exist from where the program is running.",
+    "likely_causes": [
+      "A relative path is used, but the working directory isn't what the developer assumed",
+      "A typo in the filename or path",
+      "The file was never created or was deleted/moved",
+      "Case-sensitivity mismatch (common when moving between Windows and Linux/Mac)"
+    ],
+    "debugging_steps": [
+      "Print the exact path being used and compare it to the file's actual location",
+      "Check the current working directory (os.getcwd())",
+      "Confirm the file exists at that path using a file explorer or os.path.exists()",
+      "Prefer absolute paths or paths built with os.path/pathlib during debugging"
+    ],
+    "fix_pattern": "Correct the path (ideally using pathlib for cross-platform safety), or confirm the file exists before attempting to open it.",
+    "learning_concept": "File paths, working directories, and the pathlib module",
+    "practice_seed": "Give the user a snippet that opens a file using a relative path that breaks when run from a different directory, and ask them to fix it.",
+    "references": ["https://docs.python.org/3/library/pathlib.html"],
+    "tags": ["files", "paths", "beginner"]
+  },
+  {
+    "id": "py-syntaxerror-001",
+    "error_type": "SyntaxError",
+    "language": "python",
+    "common_triggers": [
+      "invalid syntax",
+      "unexpected EOF while parsing",
+      "missing colon or parenthesis"
+    ],
+    "explanation": "Python raised this because the code doesn't follow the language's grammar rules — the parser couldn't understand it before even running it.",
+    "likely_causes": [
+      "A missing colon after if/for/while/def/class",
+      "Mismatched or missing parentheses, brackets, or quotes",
+      "A missing comma between items in a list, tuple, or function call",
+      "Using a Python keyword (e.g. 'class', 'print' in Py2 style) incorrectly"
+    ],
+    "debugging_steps": [
+      "Look at the line number in the error, then check the line just above it too — the real problem often starts earlier",
+      "Count opening and closing parentheses/brackets/quotes on the line",
+      "Check that every block-starting statement ends with a colon",
+      "Check for missing commas between function arguments or list/tuple items"
+    ],
+    "fix_pattern": "Correct the malformed syntax — add the missing colon, comma, or matching bracket/quote — then re-run to confirm the file parses.",
+    "learning_concept": "Python syntax rules and how the parser reads code before execution",
+    "practice_seed": "Give the user an if-statement missing its trailing colon and ask them to fix it.",
+    "references": ["https://docs.python.org/3/reference/grammar.html"],
+    "tags": ["syntax", "parsing", "beginner"]
+  },
+  {
+    "id": "py-recursionerror-001",
+    "error_type": "RecursionError",
+    "language": "python",
+    "common_triggers": [
+      "maximum recursion depth exceeded",
+      "infinite recursion",
+      "stack overflow in recursive function"
+    ],
+    "explanation": "Python raised this because a function kept calling itself without ever reaching a condition that stops the recursion, exceeding the interpreter's call-stack limit.",
+    "likely_causes": [
+      "The recursive function is missing a base case (a stopping condition)",
+      "The base case exists but is never actually reached due to a logic error",
+      "Each recursive call doesn't move the input closer to the base case",
+      "The problem doesn't actually need recursion and an iterative loop would be simpler and safer"
+    ],
+    "debugging_steps": [
+      "Identify the function's base case — the condition where it should stop calling itself",
+      "Add a print statement showing the argument value on each call to see if it's converging toward the base case",
+      "Check that every recursive call passes a genuinely smaller/simpler input",
+      "Consider whether a loop would solve the problem more safely than recursion"
+    ],
+    "fix_pattern": "Add or fix the base case so recursion terminates, and ensure each recursive call moves measurably closer to it.",
+    "learning_concept": "Recursion, base cases, and the call stack",
+    "practice_seed": "Give the user a factorial function missing its base case and ask them to add it so recursion terminates.",
+    "references": ["https://docs.python.org/3/library/exceptions.html#RecursionError"],
+    "tags": ["recursion", "control-flow", "beginner"]
+  }
+]
