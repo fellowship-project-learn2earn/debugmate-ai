@@ -55,7 +55,14 @@ class GatewayClient:
                 f"Gateway returned {response.status_code}: {response.text[:300]}"
             )
 
-        data = response.json()
+        # Catch instances where n8n returns a 200 status but an empty/non-JSON string
+        try:
+            data = response.json()
+        except ValueError as exc:
+            print(f"\n[CRITICAL ERROR] n8n returned a 200 OK status but invalid/empty text data: '{response.text}'")
+            raise GatewayError(
+                "Gateway response could not be parsed as JSON. Check your n8n workflow node output structure."
+            ) from exc
 
         # matches the live gateway's response shape: {"output": "...", "text": "...", ...}
         text = data.get("output") or data.get("text")
