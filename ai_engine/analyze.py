@@ -20,12 +20,16 @@ from rag.retrieval import format_for_prompt, retrieve
 REQUIRED_KEYS = {
     "error_type",
     "what_happened",
-    "why_it_happened",
-    "how_to_investigate",
+    "likely_causes",
+    "debugging_steps",
     "possible_fix",
-    "what_to_learn",
+    "fix_explanation",
+    "learning_topic",
     "practice_challenge",
 }
+
+# These two must be arrays -- everything else in REQUIRED_KEYS is a string.
+LIST_KEYS = {"likely_causes", "debugging_steps"}
 
 
 class AnalysisError(Exception):
@@ -97,4 +101,17 @@ async def analyze(
     if missing:
         raise AnalysisError(f"AI response was missing expected fields: {sorted(missing)}")
 
-    return {k: str(parsed[k]) for k in REQUIRED_KEYS}
+    result = {}
+    for key in REQUIRED_KEYS:
+        value = parsed[key]
+        if key in LIST_KEYS:
+            # Models sometimes return a single string instead of a
+            # one-item list despite instructions -- normalize rather
+            # than reject, since the frontend just needs an array.
+            if isinstance(value, str):
+                value = [value]
+            result[key] = [str(item) for item in value]
+        else:
+            result[key] = str(value)
+
+    return result

@@ -1,8 +1,14 @@
 import os
 import httpx
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Explicit path, not just load_dotenv() -- the default searches upward from
+# the CURRENT WORKING DIRECTORY, which fails to find this file when
+# ai_engine is imported as a sibling package (e.g. from backend/, whose
+# cwd is a different directory entirely). Anchoring to this file's own
+# location makes it work regardless of what process imports this module.
+load_dotenv(Path(__file__).parent / ".env")
 
 DEFAULT_API_URL = "https://olowoporoku.app.n8n.cloud/webhook/baalebos-ai"
 

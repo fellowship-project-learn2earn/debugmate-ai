@@ -24,7 +24,16 @@ from gateway_client import GatewayError
 def _score_case(case: dict, result: dict) -> dict:
     error_type_match = case["expected_error_type"].lower() in result["error_type"].lower()
 
-    full_text = " ".join(result.values()).lower()
+    # Flatten list-valued fields (likely_causes, debugging_steps) into text
+    # before searching for expected keywords.
+    flattened = []
+    for value in result.values():
+        if isinstance(value, list):
+            flattened.extend(value)
+        else:
+            flattened.append(value)
+    full_text = " ".join(flattened).lower()
+
     keywords_found = [
         kw for kw in case["expected_keywords"] if kw.lower() in full_text
     ]
