@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 # location makes it work regardless of what process imports this module.
 load_dotenv(Path(__file__).parent / ".env")
 
-DEFAULT_API_URL = "https://olowoporoku.app.n8n.cloud/webhook/baalebos-ai"
+DEFAULT_API_URL = "https://gateway.baalebo.xyz/webhook/baalebos-ai"
 
 
 class GatewayError(Exception):
