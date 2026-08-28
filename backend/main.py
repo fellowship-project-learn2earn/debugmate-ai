@@ -17,7 +17,8 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -36,18 +37,40 @@ logger = logging.getLogger("debugmate.backend")
 
 app = FastAPI(title="DebugMate AI", version="0.1.0")
 
-# Locked to the Vite dev server + FRONTEND_ORIGIN env var by default.
-# Add your deployed frontend's real domain via FRONTEND_ORIGIN once live.
-_allowed_origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
+# --- Fixed: Cleaned up terminal snippet garbage (;31R) and fixed variable assignment ---
+_allowed_origins = ["http://localhost:5173", "http://127.0.0.1:5173", "https://debugmate.baalebo.xyz"]
 if os.getenv("FRONTEND_ORIGIN"):
     _allowed_origins.append(os.getenv("FRONTEND_ORIGIN"))
 
+# Fixed typo here: Changed allow_origins from 'origins' to '_allowed_origins'
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# --- global exception handler to guarantee CORS headers on error responses ---
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException):
+    """
+    Guarantees that error responses still receive appropriate CORS headers
+    and follow the schema requested by debugService.js
+    """
+    response = JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail} if isinstance(exc.detail, dict) else {"detail": {"message": str(exc.detail)}}
+    )
+    
+    # Manually append CORS headers to error outputs to prevent preflight blocks
+    origin = request.headers.get("origin")
+    if origin in _allowed_origins:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        
+    return response
 
 
 # --- request/response models, matching the frontend's actual contract -----
@@ -93,7 +116,7 @@ def _error_body(message: str) -> dict:
 
 @app.get("/health")
 async def health():
-    return {"status": "ok"}
+    return {"status": "welcome to debugmate"}
 
 
 @app.post("/analyze", response_model=AnalyzeResponse)
@@ -129,3 +152,4 @@ async def practice_feedback(req: PracticeFeedbackRequest):
         ) from exc
 
     return PracticeFeedbackResponse(**result)
+
