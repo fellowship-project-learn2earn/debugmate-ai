@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy both backend and ai_engine (backend imports it as a sibling package)
+## Copy both backend and ai_engine (backend imports it as a sibling package)
 COPY backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
