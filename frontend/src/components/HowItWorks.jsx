@@ -4,32 +4,32 @@ function HowItWorks() {
       number: "01",
       title: "Submit Your Error",
       description:
-        "Paste your code and error message into the debugging workspace.",
+        "Choose your programming language, then paste your code and error message into the debugging workspace.",
     },
     {
       number: "02",
-      title: "Understand",
+      title: "Understand What Happened",
       description:
-        "Get a clear explanation of what happened and why the error occurred.",
+        "DebugMate analyzes the error and explains what went wrong and why it happened in clear language.",
     },
     {
       number: "03",
-      title: "Learn & Practice",
+      title: "Fix & Learn",
       description:
-        "Learn the underlying concept and practice with a small challenge.",
+        "Get practical correction guidance, corrected code, and a learning point you can apply to future problems.",
     },
   ];
 
   return (
     <section className="how-it-works" id="how-it-works">
       <div className="section-heading">
-        <p className="section-label">HOW IT WORKS</p>
+        <span className="eyebrow">HOW IT WORKS</span>
 
         <h2>From error to understanding.</h2>
 
         <p>
-          DebugMate turns confusing programming errors into guided learning
-          experiences.
+          DebugMate turns confusing programming errors into structured,
+          learner-friendly explanations.
         </p>
       </div>
 
