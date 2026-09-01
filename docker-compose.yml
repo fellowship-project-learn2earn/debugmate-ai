@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  debugmate-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    env_file:
+      - ./ai_engine/.env    # BAALEBOS_API_URL, BAALEBOS_API_KEY
+    environment:
+      - FRONTEND_ORIGIN=https://debugmate.baalebo.xyz
+    networks:
+      - shared-net
+
+  debugmate-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        - VITE_API_BASE_URL=https://api-debugmate.baalebo.xyz
+    restart: unless-stopped
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    external: true
